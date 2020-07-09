@@ -17,27 +17,28 @@ package cmd
 
 import (
 	"fmt"
+	"strconv"
+	"syphon/handler"
 
 	"github.com/spf13/cobra"
 )
 
 // deleteCmd represents the delete command
 var deleteCmd = &cobra.Command{
-	Use:   "delete",
-	Short: "A brief description of your command",
-	Long: `A longer description that spans multiple lines and likely contains examples
-and usage of using your command. For example:
-
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
+	Use:   "delete id [--alias alias] [-a alias]",
+	Short: "delete shell command from database",
+	Long: `delete shell command from database, this command
+can use ID or alias for identifier`,
+	Args: cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("delete called")
+		byAlias, _ := cmd.Flags().GetBool("alias")
+		deleteShellCommand(args, byAlias)
 	},
 }
 
 func init() {
 	rootCmd.AddCommand(deleteCmd)
+	deleteCmd.Flags().BoolP("alias", "a", false, "delete by alias")
 
 	// Here you will define your flags and configuration settings.
 
@@ -48,4 +49,16 @@ func init() {
 	// Cobra supports local flags which will only run when this command
 	// is called directly, e.g.:
 	// deleteCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
+}
+
+func deleteShellCommand(args []string, byAlias bool) {
+	if byAlias == true {
+		handler.DeleteCommandByAlias(args[0])
+	} else {
+		id, err := strconv.Atoi(args[0])
+		if err != nil {
+			fmt.Println("Please supply valid id value")
+		}
+		handler.DeleteCommandByID(id)
+	}
 }

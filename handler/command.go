@@ -21,14 +21,18 @@ type Command struct {
 
 // Init database
 func Init() {
-	db, _ := sql.Open("sqlite3", "syphon.db")
-	db.Exec("create table if not exists syphon (id integer primary key autoincrement, alias text unique, command text, category text)")
 }
 
 func checkError(err error) {
 	if err != nil {
 		panic(err)
 	}
+}
+
+func connectDb() (*sql.DB, error) {
+	db, err := sql.Open("sqlite3", "syphon.db")
+	db.Exec("create table if not exists syphon (id integer primary key autoincrement, alias text unique, command text, category text)")
+	return db, err
 }
 
 // SanityCheck for sanity
@@ -38,8 +42,7 @@ func SanityCheck(message string) {
 
 // AddCommand add command to db
 func AddCommand(alias string, command string, category string) {
-	Init()
-	db, _ := sql.Open("sqlite3", "syphon.db")
+	db, _ := connectDb()
 	tx, _ := db.Begin()
 	stmt, _ := tx.Prepare("insert into syphon (alias,command,category) values (?,?,?)")
 	_, err := stmt.Exec(alias, command, category)
@@ -50,8 +53,7 @@ func AddCommand(alias string, command string, category string) {
 
 // GetCommands get commands
 func GetCommands() {
-	Init()
-	db, _ := sql.Open("sqlite3", "syphon.db")
+	db, _ := connectDb()
 	rows, err := db.Query("select * from syphon")
 
 	checkError(err)
@@ -72,7 +74,7 @@ func GetCommands() {
 
 // UpdateCommand update command
 func UpdateCommand(db *sql.DB, id2 int, alias string, command string, category string) {
-	Init()
+	db, _ = connectDb()
 	sid := strconv.Itoa(id2) // int to string
 	tx, _ := db.Begin()
 	stmt, _ := tx.Prepare("update syphon set alias=?,command=?,category=? where id=?")
@@ -81,13 +83,23 @@ func UpdateCommand(db *sql.DB, id2 int, alias string, command string, category s
 	tx.Commit()
 }
 
-// DeleteCommand delete command
-func DeleteCommand(db *sql.DB, id2 int) {
-	Init()
+// DeleteCommandByID delete command by Id
+func DeleteCommandByID(id2 int) {
+	db, _ := connectDb()
 	sid := strconv.Itoa(id2) // int to string
 	tx, _ := db.Begin()
 	stmt, _ := tx.Prepare("delete from syphon where id=?")
 	_, err := stmt.Exec(sid)
+	checkError(err)
+	tx.Commit()
+}
+
+// DeleteCommandByAlias delete command by alias
+func DeleteCommandByAlias(alias string) {
+	db, _ := connectDb()
+	tx, _ := db.Begin()
+	stmt, _ := tx.Prepare("delete from syphon where alias=?")
+	_, err := stmt.Exec(alias)
 	checkError(err)
 	tx.Commit()
 }
