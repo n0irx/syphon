@@ -4,6 +4,7 @@ import (
 	"database/sql"
 	"fmt"
 	"os"
+	"runtime"
 	"strconv"
 
 	// sqlite driver
@@ -30,7 +31,23 @@ func checkError(err error) {
 }
 
 func connectDb() (*sql.DB, error) {
-	db, err := sql.Open("sqlite3", "syphon.db")
+
+	path := ""
+
+	os := runtime.GOOS
+	switch os {
+	case "windows":
+		path = "C:\\Users\\trentm\\AppData\\Local\\Acme\\Syphon\\syphon.db"
+	case "darwin":
+		path = "/Users/trentm/Library/Application Support/Syphon/syphon.db"
+	case "linux":
+		path = "/home/trentm/.local/share/Syphon/syphon.db"
+	default:
+		path = "/home/trentm/.local/share/Syphon/syphon.db"
+	}
+
+	db, err := sql.Open("sqlite3", path)
+
 	db.Exec("create table if not exists syphon (id integer primary key autoincrement, alias text unique, command text, category text)")
 	return db, err
 }
