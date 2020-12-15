@@ -3,12 +3,15 @@ package handler
 import (
 	"database/sql"
 	"fmt"
+	"log"
 	"os"
+	"path/filepath"
 	"strconv"
 
 	// sqlite driver
 	_ "github.com/mattn/go-sqlite3"
 	"github.com/olekukonko/tablewriter"
+	"github.com/shibukawa/configdir"
 )
 
 // Command struct object
@@ -30,8 +33,25 @@ func checkError(err error) {
 }
 
 func connectDb() (*sql.DB, error) {
-	db, err := sql.Open("sqlite3", "syphon.db")
+
+	configDirs := configdir.New("n0irx", "syphon")
+	cacheDir := configDirs.QueryCacheFolder()
+
+	err := os.MkdirAll(cacheDir.Path, 0755)
+
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	dbPath := filepath.Join(cacheDir.Path, "syphon.db")
+	db, err := sql.Open("sqlite3", dbPath)
+
+	if err != nil {
+		log.Fatal(err)
+	}
+
 	db.Exec("create table if not exists syphon (id integer primary key autoincrement, alias text unique, command text, category text)")
+
 	return db, err
 }
 
@@ -48,7 +68,7 @@ func AddCommand(alias string, command string, category string) {
 	_, err := stmt.Exec(alias, command, category)
 	checkError(err)
 	tx.Commit()
-	fmt.Println("Done adding command")
+	fmt.Printf("Command added: \n\tname: %s \n\talias: %s \n\tcategory: %s", command, alias, category)
 }
 
 // GetCommands get commands
