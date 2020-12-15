@@ -3,7 +3,6 @@ module syphon
 go 1.12
 
 require (
-	github.com/go-delve/delve v1.4.0 // indirect
 	github.com/mattn/go-sqlite3 v2.0.3+incompatible
 	github.com/mitchellh/go-homedir v1.1.0
 	github.com/olekukonko/tablewriter v0.0.4

@@ -27,9 +27,8 @@ import (
 var deleteCmd = &cobra.Command{
 	Use:   "delete id [--alias alias] [-a alias]",
 	Short: "delete shell command from database",
-	Long: `delete shell command from database, this command
-can use ID or alias for identifier`,
-	Args: cobra.ExactArgs(1),
+	Long:  "delete shell command from database, this command can use ID or alias for identifier check syphon delete --help to see delete command help",
+	Args:  cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
 		byAlias, _ := cmd.Flags().GetBool("alias")
 		deleteShellCommand(args, byAlias)

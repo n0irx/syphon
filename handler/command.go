@@ -68,7 +68,7 @@ func AddCommand(alias string, command string, category string) {
 	_, err := stmt.Exec(alias, command, category)
 	checkError(err)
 	tx.Commit()
-	fmt.Printf("Command added: \n\tname: %s \n\talias: %s \n\tcategory: %s", command, alias, category)
+	fmt.Printf("\nCommand added \n\nCommand: \t%s \nAlias: \t%s \nCategory: \t%s", command, alias, category)
 }
 
 // GetCommands get commands
@@ -112,6 +112,7 @@ func DeleteCommandByID(id2 int) {
 	_, err := stmt.Exec(sid)
 	checkError(err)
 	tx.Commit()
+	fmt.Printf("Command deleted: \nid: %d", id2)
 }
 
 // DeleteCommandByAlias delete command by alias
@@ -122,4 +123,5 @@ func DeleteCommandByAlias(alias string) {
 	_, err := stmt.Exec(alias)
 	checkError(err)
 	tx.Commit()
+	fmt.Printf("Command deleted: \alias: %s", alias)
 }

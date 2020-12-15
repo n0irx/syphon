@@ -17,3 +17,5 @@
 .vscode
 .DS_Store
 syphon.db
+syphon
+./syphon
