@@ -19,7 +19,6 @@ TODO
 - Go
 
 ## Usage 
-``
 
 ### Syphon Add
 
@@ -34,7 +33,7 @@ Output:
 ```
 Command added:
 
-Command:    ubuntu@ec2-xx-xxx-xxx-xxx.compute-1.amazonaws.com
+Command:    ssh -i "my_aws_key.pem" ubuntu@ec2-xx-xxx-xxx-xxx.compute-1.amazonaws.com
 Alias:      ssh-ubuntu-server
 Category:   ssh
 ```
