@@ -5,8 +5,10 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"os/exec"
 	"path/filepath"
 	"strconv"
+	"strings"
 
 	// sqlite driver
 	_ "github.com/mattn/go-sqlite3"
@@ -69,6 +71,36 @@ func AddCommand(alias string, command string, category string) {
 	checkError(err)
 	tx.Commit()
 	fmt.Printf("\nCommand added \n\nCommand: \t%s \nAlias: \t%s \nCategory: \t%s", command, alias, category)
+}
+
+func ExecCommand(alias string) {
+	db, _ := connectDb()
+	rows, err := db.Query("select command from syphon where alias=?", alias)
+
+	checkError(err)
+
+	for rows.Next() {
+		var command string
+		rows.Scan(&command)
+		if err := rows.Scan(&command); err != nil {
+			// Check for a scan error.
+			// Query rows will be closed with defer.
+			log.Fatal(err)
+		}
+
+		commandArgs := strings.Split(command, " ")
+		out, err := exec.Command(commandArgs[0], commandArgs[1:]...).Output()
+
+		// var out bytes.Buffer
+		// cmd.Stdout = &out
+
+		// err := cmd.Run()
+
+		if err != nil {
+			log.Fatal(err)
+		}
+		fmt.Println(string(out))
+	}
 }
 
 // GetCommands get commands

@@ -31,10 +31,10 @@ var cfgFile string
 var rootCmd = &cobra.Command{
 	Use:   "syphon",
 	Short: "Brew you coffee, and save you shell command for later",
-	Long: `Syphon is an CLI application that let you save shell command for latter use.
-Syphon is a CLI library for saving you shell command fore later use. Syphon will be advantagous if you have a 
+	Long: `Syphon is an CLI application that let you save shell command for later use.
+Syphon will be advantagous if you have a 
 long shell command that you repeatedly use, instead searching from history of your shell, you can store it to 
-Syphon and git it a unique name`,
+Syphon, name it, and forget it`,
 	// Uncomment the following line if your bare application
 	// has an action associated with it:
 	Run: func(cmd *cobra.Command, args []string) {
@@ -57,7 +57,7 @@ func init() {
 	// Here you will define your flags and configuration settings.
 	// Cobra supports persistent flags, which, if defined here,
 	// will be global for your application.
-	rootCmd.AddCommand(addCmd)
+	// rootCmd.AddCommand(addCmd)
 
 	rootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default is $HOME/.syphon.yaml)")
 
