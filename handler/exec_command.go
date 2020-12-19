@@ -1,8 +1,8 @@
 package handler
 
 import (
-	"fmt"
 	"log"
+	"os"
 	"os/exec"
 	"strings"
 )
@@ -24,12 +24,15 @@ func ExecCommand(alias string) {
 		}
 
 		commandArgs := strings.Split(command, " ")
-		out, err := exec.Command(commandArgs[0], commandArgs[1:]...).Output()
+		cmd := exec.Command(commandArgs[0], commandArgs[1:]...)
 
+		cmd.Stdin = os.Stdin
+		cmd.Stdout = os.Stdout
+		cmd.Stderr = os.Stderr
+		err = cmd.Run()
 		if err != nil {
-			log.Fatal(err)
+			log.Fatalln(err)
 		}
 
-		fmt.Println(string(out))
 	}
 }
