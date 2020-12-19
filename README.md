@@ -22,6 +22,8 @@ TODO
 
 ### Syphon Add
 
+Description: Add command shell to database  
+
 Input:  
 
 ```bash
@@ -40,6 +42,8 @@ Category:   ssh
 
 ### Syphon List
 
+Description: List command shell from database  
+
 Input:  
 
 ```bash
@@ -57,7 +61,22 @@ Output:
 +----+---------------------+---------------------------------------------------+----------+
 ```
 
+### Syphon Eval
+
+Description: Run your saved command  
+
+Input:  
+
+```bash
+syphon eval alias
+
+# example: 
+syphone eval ssh-ubuntu-server
+```
+
 ### Syphon Delete
+
+Description: Delete your saved command  
 
 Input:  
 
