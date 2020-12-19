@@ -46,5 +46,9 @@ func init() {
 }
 
 func addShellCommand(args []string) {
-	handler.AddCommand(args[0], args[1], args[2])
+	if len(args) < 3 {
+		handler.AddCommand(args[0], args[1], "Uncategorized")
+	} else {
+		handler.AddCommand(args[0], args[1], args[2])
+	}
 }

@@ -56,8 +56,9 @@ func deleteShellCommand(args []string, byAlias bool) {
 	} else {
 		id, err := strconv.Atoi(args[0])
 		if err != nil {
-			fmt.Println("Please supply valid id value")
+			fmt.Println("Error: Please supply valid id value")
+		} else {
+			handler.DeleteCommandByID(id)
 		}
-		handler.DeleteCommandByID(id)
 	}
 }
