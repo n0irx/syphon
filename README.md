@@ -26,6 +26,10 @@ Description: Add command shell to database
 Input:  
 
 ```bash
+# syntax
+syphon add <command_alias> "<shell_command>" [<category>]
+
+# example
 syphon add ssh-ubuntu-server "ssh -i \"my_aws_key.pem\" ubuntu@ec2-xx-xxx-xxx-xxx.compute-1.amazonaws.com" sshs
 ```
 
@@ -41,7 +45,7 @@ Category:   ssh
 
 ### Syphon List
 
-Description: List command shell from database  
+Description: List saved command shell from database  
 
 Input:  
 
@@ -60,17 +64,18 @@ Output:
 +----+---------------------+---------------------------------------------------+----------+
 ```
 
-### Syphon Eval
+### Syphon Exec
 
-Description: Run your saved command  
+Description: Run your saved shell command  
 
 Input:  
 
 ```bash
-syphon eval alias
+# syntax
+syphon exec <alias>
 
 # example: 
-syphone eval ssh-ubuntu-server
+syphone exec ssh-ubuntu-server
 ```
 
 ### Syphon Delete
@@ -81,9 +86,15 @@ Input:
 
 ```bash
 # delete by id
-syphon delete id
+syphon delete <id>
+
+# example 
+syphon delete 1
 
 # delete by alias
+syphon delete --alias <alias>
+
+# example
 syphon delete --alias ssh-ubuntu-server
 ```
 
@@ -91,7 +102,7 @@ Output:
 
 ```
 Command deleted:
-alias:  ssh-ubuntu-server-2
+alias:  ssh-ubuntu-server
 ```
 
 ### Syphon Help
