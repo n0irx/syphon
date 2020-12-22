@@ -19,3 +19,5 @@
 syphon.db
 syphon
 ./syphon
+./dist
+dist
