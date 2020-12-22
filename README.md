@@ -4,16 +4,15 @@ A Cli app to save shell commands for latter use
 
 ## Installation
 
-## From source
+### Binaries
+Check the release page here: https://github.com/n0irx/syphon/releases
+
+### From source
 
 ```bash
 git clone https://github.com/n0irx/syphon
 cd syphon && go install
 ```
-
-## Go Get
-
-TODO
 
 ## Requirements
 - Go
