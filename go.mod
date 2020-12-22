@@ -1,4 +1,4 @@
-module syphon
+module github.com/n0irx/syphon
 
 go 1.12
 
