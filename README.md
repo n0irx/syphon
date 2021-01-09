@@ -110,3 +110,11 @@ alias:  ssh-ubuntu-server
 ```bash
 syphon <command> --help
 ```
+
+## Contributing
+
+The main purpose of this repository is to continue evolving Syphon app, making it faster and easier to use. 
+
+### License
+
+Syphon is [MIT licensed](./LICENSE).
