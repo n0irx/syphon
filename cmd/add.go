@@ -24,8 +24,11 @@ import (
 // addCmd represents the add command
 var addCmd = &cobra.Command{
 	Use:   "add alias \"command\" [category]",
-	Short: "add shell command to database.",
-	Long:  "add shell command to database You can include category by specifying it on command, see syphon add --help to see add command help.",
+	Short: "add shell command.",
+	Long:  "add shell command to database.",
+	Aliases: []string{"a"},
+	Example: `  - syphon add "ls -la" utility
+  - syphon add "ls -la"`,
 	Run: func(cmd *cobra.Command, args []string) {
 		addShellCommand(args)
 	},
