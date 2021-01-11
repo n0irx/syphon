@@ -27,7 +27,8 @@ var listCmd = &cobra.Command{
 	Short: "list saved shell command.",
 	Long:  "list saved shell command from database.",
 	Aliases: []string{"l"},
-	Example: "  - syphon list \n  - syphon l",
+	Example: `  - syphon list
+  - syphon l`,
 	Run: func(cmd *cobra.Command, args []string) {
 		listShellCommand()
 	},
