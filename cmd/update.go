@@ -24,8 +24,11 @@ import (
 // updateCmd represents the update command
 var updateCmd = &cobra.Command{
 	Use:   "update id [--alias alias] \"new_command\"",
-	Short: "update shell command from database.",
-	Long:  "update shell command from database, see syphon update --help to see update command help.",
+	Short: "update/edit shell command.",
+	Long:  "update/edit shell command from database by shell command alias or id.",
+	Aliases: []string{"u", "edit"},
+	Example: `  - syphon update 12 "ls -la"
+  - syphon update --alias super-ls "ls -la"`,
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Println("update called")
 	},

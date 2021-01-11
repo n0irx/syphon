@@ -23,9 +23,12 @@ import (
 
 // execCmd represents the add command
 var execCmd = &cobra.Command{
-	Use:   "exec alias",
-	Short: "exec shell command from database.",
-	Long:  "exec shell command from database, see syphon add --help to see add command help.",
+	Use:   "exec <alias>",
+	Short: "execute saved shell command.",
+	Long:  "execute saved shell command from database by shell command alias or id.",
+	Aliases: []string{"e"},
+	Example: `  - syphon exec ssh-server-1
+  - syphon e ssh-server-1`,
 	Run: func(cmd *cobra.Command, args []string) {
 		execShellCommand(args)
 	},

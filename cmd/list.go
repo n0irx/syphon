@@ -24,8 +24,11 @@ import (
 // listCmd represents the list command
 var listCmd = &cobra.Command{
 	Use:   "list",
-	Short: "list your command from database",
-	Long:  "list shell command from database.",
+	Short: "list saved shell command.",
+	Long:  "list saved shell command from database.",
+	Aliases: []string{"l"},
+	Example: `  - syphon list
+  - syphon l`,
 	Run: func(cmd *cobra.Command, args []string) {
 		listShellCommand()
 	},
