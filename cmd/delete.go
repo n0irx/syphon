@@ -25,12 +25,12 @@ import (
 
 // deleteCmd represents the delete command
 var deleteCmd = &cobra.Command{
-	Use:   "delete <command_id>",
+	Use:   "delete [<command_id>] [--alias <alias>]",
 	Short: "delete saved shell command.",
 	Long:  "delete saved shell command from database by command id or command alias.",
 	Aliases: []string{"d", "remove"},
 	Example: `  - syphon delete 12
-  - syphon delete ssh-server-1`,
+  - syphon delete --alias ssh-server-1`,
 	Args:  cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
 		byAlias, _ := cmd.Flags().GetBool("alias")
