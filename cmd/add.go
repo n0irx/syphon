@@ -16,16 +16,16 @@ limitations under the License.
 package cmd
 
 import (
-	"syphon/handler"
+	"github.com/noirvelle/syphon/handler"
 
 	"github.com/spf13/cobra"
 )
 
 // addCmd represents the add command
 var addCmd = &cobra.Command{
-	Use:   "add alias \"command\" [category]",
-	Short: "add shell command.",
-	Long:  "add shell command to database.",
+	Use:     "add alias \"command\" [category]",
+	Short:   "add shell command.",
+	Long:    "add shell command to database.",
 	Aliases: []string{"a"},
 	Example: `  - syphon add "ls -la" utility
   - syphon add "ls -la"`,

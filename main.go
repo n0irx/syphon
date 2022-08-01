@@ -15,7 +15,7 @@ limitations under the License.
 */
 package main
 
-import "syphon/cmd"
+import "github.com/noirvelle/syphon/cmd"
 
 func main() {
 	cmd.Execute()

@@ -16,16 +16,16 @@ limitations under the License.
 package cmd
 
 import (
-	"syphon/handler"
+	"github.com/noirvelle/syphon/handler"
 
 	"github.com/spf13/cobra"
 )
 
 // listCmd represents the list command
 var listCmd = &cobra.Command{
-	Use:   "list",
-	Short: "list saved shell command.",
-	Long:  "list saved shell command from database.",
+	Use:     "list",
+	Short:   "list saved shell command.",
+	Long:    "list saved shell command from database.",
 	Aliases: []string{"l"},
 	Example: `  - syphon list
   - syphon l`,

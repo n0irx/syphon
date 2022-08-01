@@ -16,16 +16,16 @@ limitations under the License.
 package cmd
 
 import (
-	"syphon/handler"
+	"github.com/noirvelle/syphon/handler"
 
 	"github.com/spf13/cobra"
 )
 
 // execCmd represents the add command
 var execCmd = &cobra.Command{
-	Use:   "exec <alias>",
-	Short: "execute saved shell command.",
-	Long:  "execute saved shell command from database by shell command alias or id.",
+	Use:     "exec <alias>",
+	Short:   "execute saved shell command.",
+	Long:    "execute saved shell command from database by shell command alias or id.",
 	Aliases: []string{"e"},
 	Example: `  - syphon exec ssh-server-1
   - syphon e ssh-server-1`,

@@ -5,7 +5,7 @@ A Cli app to save shell commands for latter use
 ## Installation
 
 ### Binaries
-Check the release page here: https://github.com/n0irx/syphon/releases
+Check the release page here: https://github.com/n0irx/github.com/noirvelle/syphon/releases
 
 ### From source
 
